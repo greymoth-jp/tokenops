@@ -42,9 +42,9 @@
   <text x="990" y="1000" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="30" fill="#111111">$1,163</text>
 <text x="90" y="1068" font-family="Mono" font-weight="700" font-size="24" fill="#6B6B6B">07</text>
   <text x="142" y="1062" font-family="Mono" font-weight="700" font-size="25" fill="#111111">session-07</text>
-  <text x="142" y="1085" font-family="Mono" font-size="16" fill="#6B6B6B">2758msg · 505k/turn · opus-4-8</text>
-  <rect x="538" y="1047" width="119" height="13" fill="#FF3B12"/>
-  <text x="990" y="1068" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="30" fill="#111111">$1,074</text>
+  <text x="142" y="1085" font-family="Mono" font-size="16" fill="#6B6B6B">2762msg · 505k/turn · opus-4-8</text>
+  <rect x="538" y="1047" width="120" height="13" fill="#FF3B12"/>
+  <text x="990" y="1068" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="30" fill="#111111">$1,084</text>
 <text x="90" y="1136" font-family="Mono" font-weight="700" font-size="24" fill="#6B6B6B">08</text>
   <text x="142" y="1130" font-family="Mono" font-weight="700" font-size="25" fill="#111111">session-08</text>
   <text x="142" y="1153" font-family="Mono" font-size="16" fill="#6B6B6B">2141msg · 554k/turn · opus-4-8</text>

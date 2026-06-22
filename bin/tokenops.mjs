@@ -19,7 +19,7 @@ function report(data) {
   const p = (v) => (v / T * 100).toFixed(1) + "%";
   const L = [];
   L.push(`tokenops report · ${days.length} days (${days[0]} → ${days[days.length - 1]}) · ${totals.msgs.toLocaleString()} msgs`);
-  L.push(`est. API-equivalent cost: ${usd(T)}  (推定 · Max/Pro 購読なら抽出価値で実支払いでない)`);
+  L.push(`est. API-equivalent cost: ${usd(T)}  (estimate · API-equivalent value, not subscription spend)`);
   L.push("");
   L.push("cost by component:");
   L.push(`  cacheRead  ${tok(totals.read).padStart(7)}  ${usd(c.read).padStart(11)}  ${p(c.read).padStart(6)}`);

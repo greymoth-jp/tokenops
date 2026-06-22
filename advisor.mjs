@@ -34,7 +34,7 @@ export function computeLevers(data) {
 export function advise(data) {
   const { totals } = data, T = totals.cost, lv = computeLevers(data);
   const out = [];
-  out.push(`tokenops advise · ${data.sessions.length} sessions · est total ${usd(T)} (推定API換算)`);
+  out.push(`tokenops advise · ${data.sessions.length} sessions · est total ${usd(T)} (est. API-equivalent)`);
   out.push(`components: cacheRead ${pct(totals.c.read, T)} · cacheWrite ${pct(totals.c.write, T)} · output ${pct(totals.c.out, T)} · input ${pct(totals.c.in, T)}`);
   out.push("");
   out.push(`① CACHE HYGIENE — ${lv.mega.length} bloated sessions (≥300k ctx/turn) · est reclaimable ${usd(lv.hygiene)}`);
@@ -50,7 +50,7 @@ export function advise(data) {
   out.push(`③ OUTPUT DISCIPLINE — output is ${pct(totals.c.out, T)} · est ${usd(lv.output)}`);
   out.push(`   action: terser, structured output; avoid restating. (input compression NOT worth it — input is ${pct(totals.c.in, T)}.)`);
   out.push("");
-  out.push(`≈ reclaimable (conservative, overlap-discounted): ${usd(lv.savings)} of ${usd(T)} = −${lv.pct}% (推定)`);
+  out.push(`≈ reclaimable (conservative, overlap-discounted): ${usd(lv.savings)} of ${usd(T)} = −${lv.pct}% (est.)`);
   out.push(`NOT recommended here: input compression (input ${pct(totals.c.in, T)}), semantic-caching outputs (agentic=broken), per-turn model switching (breaks cache).`);
   return out.join("\n");
 }

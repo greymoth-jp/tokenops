@@ -64,7 +64,7 @@ em{font-style:normal;color:#FF3B12;font-weight:700}
 
 <div class="tag">✺ AI EFFICIENCY OS</div><div class="bar"></div>
 <h1>I measured my Claude&nbsp;Code cost for ${days.length} days.<br>Then I found the advice everyone gives is <span class="acc">wrong</span> — for it.</h1>
-<p class="lead dim">${totals.msgs.toLocaleString()} messages · est. <b style="color:#111">${usd(T)}</b> API-equivalent (Max/Pro なら抽出価値・実支払いでない). 100% local, nothing sent.</p>
+<p class="lead dim">${totals.msgs.toLocaleString()} messages · est. <b style="color:#111">${usd(T)}</b> API-equivalent (extracted value, not subscription spend). 100% local, nothing sent.</p>
 
 <section><div class="kicker">THE TRUTH — WHERE THE MONEY GOES</div>
 <div class="cbar"><i style="width:${p(c.read)};background:#FF3B12"></i><i style="width:${p(c.write)};background:#111"></i><i style="width:${p(c.out)};background:#6B6B6B"></i><i style="width:${p(c.in)};background:#C9C2B4"></i></div>

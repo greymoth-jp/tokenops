@@ -6,25 +6,25 @@
 <rect x="90" y="150" width="900" height="5" fill="#111111"/>
 <text x="90" y="196" font-family="Mono" font-size="22" fill="#6B6B6B">✺ COST OPTIMIZED · 37 DAYS · 192k msgs</text>
 <text x="90" y="300" font-family="Mono" font-size="24" fill="#6B6B6B">BEFORE — measured</text>
-<text x="90" y="392" font-family="Grotesk" font-weight="700" font-size="118" fill="#111111">≈ $29,057</text>
+<text x="90" y="392" font-family="Grotesk" font-weight="700" font-size="118" fill="#111111">≈ $29,138</text>
 <text x="90" y="436" font-family="Mono" font-size="22" fill="#6B6B6B">est. API-equivalent · where it goes ↓</text>
-<rect x="90.0" y="600" width="640.8" height="46" fill="#FF3B12"/><rect x="730.8" y="600" width="175.1" height="46" fill="#111111"/><rect x="905.9" y="600" width="81.3" height="46" fill="#6B6B6B"/><rect x="987.2" y="600" width="2.8" height="46" fill="#C9C2B4"/>
-<text x="90" y="680" font-family="Mono" font-size="20" fill="#6B6B6B">cacheRead 71.2%</text><text x="340" y="680" font-family="Mono" font-size="20" fill="#6B6B6B">cacheWrite 19.5%</text><text x="590" y="680" font-family="Mono" font-size="20" fill="#6B6B6B">output 9.0%</text><text x="840" y="680" font-family="Mono" font-size="20" fill="#6B6B6B">input 0.3%</text>
+<rect x="90.0" y="600" width="641.0" height="46" fill="#FF3B12"/><rect x="731.0" y="600" width="174.9" height="46" fill="#111111"/><rect x="905.9" y="600" width="81.3" height="46" fill="#6B6B6B"/><rect x="987.2" y="600" width="2.8" height="46" fill="#C9C2B4"/>
+<text x="90" y="680" font-family="Mono" font-size="20" fill="#6B6B6B">cacheRead 71.2%</text><text x="340" y="680" font-family="Mono" font-size="20" fill="#6B6B6B">cacheWrite 19.4%</text><text x="590" y="680" font-family="Mono" font-size="20" fill="#6B6B6B">output 9.0%</text><text x="840" y="680" font-family="Mono" font-size="20" fill="#6B6B6B">input 0.3%</text>
 <text x="90" y="540" font-family="Mono" font-weight="700" font-size="22" fill="#FF3B12">input 0.3% — compressing it saves nothing. the lever is cache.</text>
 <rect x="90" y="704" width="900" height="2" fill="#111111"/>
-<text x="90" y="836" font-family="Mono" font-size="22" fill="#6B6B6B">few mega-sessions = most of the cost · reclaimable (推定):</text>
+<text x="90" y="836" font-family="Mono" font-size="22" fill="#6B6B6B">few mega-sessions = most of the cost · reclaimable (est.):</text>
 <text x="90" y="880" font-family="Mono" font-weight="700" font-size="26" fill="#111111">SESSION HYGIENE</text>
   <text x="90" y="908" font-family="Mono" font-size="18" fill="#6B6B6B">compact / lean prefix / no mega-ctx</text>
-  <text x="990" y="888" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="34" fill="#1F7A4D">− $6,385</text>
+  <text x="990" y="888" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="34" fill="#1F7A4D">− $6,414</text>
 <text x="90" y="958" font-family="Mono" font-weight="700" font-size="26" fill="#111111">BOUNDARY ROUTING</text>
   <text x="90" y="986" font-family="Mono" font-size="18" fill="#6B6B6B">opus→sonnet/haiku per session</text>
   <text x="990" y="966" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="34" fill="#1F7A4D">− $771.25</text>
 <text x="90" y="1036" font-family="Mono" font-weight="700" font-size="26" fill="#111111">OUTPUT DISCIPLINE</text>
   <text x="90" y="1064" font-family="Mono" font-size="18" fill="#6B6B6B">terser, structured</text>
-  <text x="990" y="1044" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="34" fill="#1F7A4D">− $787.90</text>
+  <text x="990" y="1044" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="34" fill="#1F7A4D">− $790.03</text>
 <rect x="90" y="1118" width="900" height="2" fill="#111111"/>
-<text x="90" y="1180" font-family="Mono" font-size="24" fill="#6B6B6B">AFTER — 推定</text>
-<text x="90" y="1240" font-family="Grotesk" font-weight="700" font-size="82" fill="#1F7A4D">≈ $22,305</text>
+<text x="90" y="1180" font-family="Mono" font-size="24" fill="#6B6B6B">AFTER — est.</text>
+<text x="90" y="1240" font-family="Grotesk" font-weight="700" font-size="82" fill="#1F7A4D">≈ $22,359</text>
 <text x="990" y="1200" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="64" fill="#FF3B12">−23%</text>
 <text x="990" y="1240" text-anchor="end" font-family="Mono" font-size="20" fill="#6B6B6B">conservative est.</text>
 <text x="90" y="1300" font-family="Mono" font-size="19" fill="#6B6B6B">✺ ESTIMATE · 100% local · not input-compression hype — TOKENOPS</text>

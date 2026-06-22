@@ -4,68 +4,65 @@
 
 ![Claude Code cost concentration](examples/waste-card.png)
 
-Claude Code の**実トークンコストを監査し、データで検証した最適化アクションを出す**ローカルツール。`~/.claude/projects` の JSONL を読むだけで、外部送信はゼロ。金額は推定API換算（Max/Pro 購読なら実支払いでなく「抽出した価値」）。
+A local CLI that **audits your real Claude Code token cost and hands you data-validated optimization actions**. It reads `~/.claude/projects` and sends nothing. Cost figures are estimates (there's no public Claude tokenizer) and are labeled as such.
 
-cc-usage の engine/フォントを再利用（隣の `Desktop/cc-usage/`）。
+Reuses the cc-usage engine + fonts.
 
-## なぜ作ったか — 計測したら通説が崩れた
+## Try it (no setup)
 
-37日・185k メッセージを成分分解した結果：
+```bash
+npx @greymoth/tokenops demo    # synthetic data — try it without your own usage
+npm i -g @greymoth/tokenops    # global install
+tokenops report                # analyze your own ~/.claude
+```
 
-| 成分 | 比率 |
+## Why I built it — I measured, and the common advice fell apart
+
+37 days, ~188k messages:
+
+| component | share |
 |---|---|
 | cacheRead | **72%** |
 | cacheWrite | 18.6% |
 | output | 9% |
 | **input** | **0.3%** |
 
-opus がコストの **91.6%**。コストは少数の巨大 session に偏在（上位8本で約半分・毎ターン約50万トークンを再読）。
+opus was 91.6% of the cost, and it concentrates in a few mega-sessions (top 8 ≈ half the spend, re-reading ~500k tokens of context every turn).
 
-つまり世間で語られる **「input を圧縮して節約」はこのプロファイルでは無意味**（input は0.3%）。さらに静的プロンプトを圧縮すると prefix cache が崩れて**逆効果**。Antigravity 6本の網羅リサーチを self-kill して三角検証した結論：
+So "compress your prompts" (LLMLingua and friends) is **pointless for this profile** — input is 0.3%. Worse, compressing a static prompt breaks the prefix cache, so it can cost *more*. After triangulating with parallel research + self-kill:
 
-- **却下/有害**（この使い方では）: input 圧縮（LLMLingua）/ semantic cache の出力キャッシュ（agentic で破綻）/ session 内の per-turn モデル切替（cache 全リセット）。
-- **有効レバー**: ① cache 衛生 ② 境界（session/subagent 単位）モデル選択 ③ output 規律。
+- **Rejected here**: input compression · semantic-caching outputs (broken for agentic work) · per-turn model switching (resets the prefix cache).
+- **What actually works**: ① cache hygiene ② boundary (whole-session) model selection ③ output discipline.
 
-詳細＝`RESEARCH_SURVIVORS.md`、出典＝`../../GitRepo/REFERENCES.md`(2026-06-22節)。
-
-## インストール（公開済み）
+## Commands
 
 ```bash
-npx @greymoth/tokenops demo    # 自分のデータ無しで試す（合成データ・即時）
-npm i -g @greymoth/tokenops    # グローバル install
-tokenops report                # 自分の ~/.claude を解析
+tokenops report     # cost by component + by-model (default)
+tokenops advise     # prioritized, $-quantified actions
+tokenops waste      # per-session waste + cost concentration
+tokenops trend      # weekly cost trend (actual spend)
+tokenops doctor     # weigh always-on context (CLAUDE.md + memory) as cache cost — fast, no scan
+tokenops card       # share cards → _out/  (add --anon to hide project names)
+tokenops portfolio  # one-page story → _out/portfolio.html
+tokenops demo       # run on synthetic data (try it without your own usage)
 ```
 
-## 使い方
+The 3 levers (ordered by cost share):
 
-```bash
-node bin/tokenops.mjs report     # 成分別コスト + モデル別（既定）
-node bin/tokenops.mjs advise     # 優先順位付きの $換算アクション
-node bin/tokenops.mjs waste      # session 別の無駄 + コスト集中
-node bin/tokenops.mjs trend      # 週次コスト推移（実支出）
-node bin/tokenops.mjs doctor     # always-on context(CLAUDE.md+memory)の重量→cacheRead換算（高速・scan不要）
-node bin/tokenops.mjs card       # シェアカード3種 → _out/ (savings-card.svg + card-animated.html + waste-card.svg)
-node bin/tokenops.mjs portfolio  # 全ストーリー1枚 → _out/portfolio.html
-node _audit.mjs                  # 全機能の検証（ALL PASS）
-```
+1. **CACHE HYGIENE** — bloated sessions (≥300k ctx/turn) carry the bill. Use milestone `/compact`, `/clear` before ~70%, and keep `CLAUDE.md`/tools **static** (dynamic content busts the prefix cache).
+2. **BOUNDARY ROUTING** — route a whole mechanical session to a cheaper tier. **Never mid-session** — that resets the prefix cache and costs more.
+3. **OUTPUT DISCIPLINE** — terser, structured output. (Input compression isn't worth it — input is ~0.3%.)
 
-`doctor` は #1 レバー(cache 衛生)を proactive 検査にした実機能。毎ターン cache 再読される CLAUDE.md＋各 project の MEMORY.md index の重さを測り、cacheRead コストへ換算して trim 対象を出す。**知識負債＝cache コスト**を1数字で示す。
+## Honesty / privacy
 
-`advise` の3レバー（コスト比で優先）:
-1. **CACHE HYGIENE** — 巨大 session（≥300k ctx/turn）を milestone `/compact`・70%前に `/clear`・CLAUDE.md/tool を静的に保つ（動的値＝cache miss）。
-2. **BOUNDARY ROUTING** — 機械的な session を丸ごと sonnet/haiku へ。**session 途中で切替えない**（prefix cache 全リセット＝純損）。
-3. **OUTPUT DISCIPLINE** — 簡潔・構造化。
+- Sends nothing. Reads local JSONL only.
+- Costs use the engine's estimate rates (cacheRead 0.1×, cacheWrite 1.25×/2×). No exaggeration — if you're on Max/Pro this is extracted value, not real spend.
+- The card's AFTER is a **conservative** estimate from transparent lever math + an overlap discount — not a fabricated "97% saved". A `#final` deterministic mode lets you verify the end state.
 
-## 正直さ / プライバシー
+## Layout
 
-- 送信ゼロ。ローカルの JSONL を読むだけ。
-- 金額は engine の推定レート（cacheRead 0.1x・cacheWrite 1.25x/2x）。誇張しない。
-- `card` の AFTER は**透明なレバー計算＋重複割引**の保守的推定で、捏造された「97% 削減」ではない。
+- `lib.mjs` — one scan → per-session aggregates + component cost (reuses the cc-usage engine). Self-check: `node lib.mjs`.
+- `advisor.mjs` / `observatory.mjs` / `savings-card.mjs` / `doctor.mjs` / `demo.mjs` — each exports a function and has a small CLI.
+- `bin/tokenops.mjs` — one scan feeds every subcommand.
 
-## 構成
-
-- `lib.mjs` — 1スキャンで per-session 集計＋成分コスト（cc-usage engine 再利用）。自己検査つき（`node lib.mjs`）。
-- `advisor.mjs` / `observatory.mjs` / `savings-card.mjs` — それぞれ関数 export ＋単体 CLI。
-- `bin/tokenops.mjs` — 1スキャンを全 subcommand に配る統合 CLI。
-
-> `engine.mjs` とフォントは vendor 済（cc-usage 由来・greymoth 自身の資産）＝**自己完結**。cc-usage への相対 import なし。`npm pack` で publish 可能。
+> `engine.mjs` and the fonts are vendored from cc-usage (the author's own work). Self-contained; `npm pack`-able. MIT.

@@ -1,6 +1,6 @@
 // tokenops — Token-Savings Visualizer card (riso editorial, dependency-free SVG).
 // Reuses cc-usage fonts (read-only) + lib.scan. BEFORE = measured. AFTER = conservative,
-// transparent lever math (NOT a fabricated %). All figures labelled 推定/ESTIMATE.
+// transparent lever math (NOT a fabricated %). All figures labelled ESTIMATE.
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -55,10 +55,10 @@ ${bar}
 ${legend}
 <text x="${M}" y="540" font-family="Mono" font-weight="700" font-size="22" fill="${ACCENT}">input ${(c.in / total * 100).toFixed(1)}% — compressing it saves nothing. the lever is cache.</text>
 <rect x="${M}" y="${barY + barH + 58}" width="${W - 2 * M}" height="2" fill="${INK}"/>
-<text x="${M}" y="836" font-family="Mono" font-size="22" fill="${DIM}">few mega-sessions = most of the cost · reclaimable (推定):</text>
+<text x="${M}" y="836" font-family="Mono" font-size="22" fill="${DIM}">few mega-sessions = most of the cost · reclaimable (est.):</text>
 ${leverSVG}
 <rect x="${M}" y="1118" width="${W - 2 * M}" height="2" fill="${INK}"/>
-<text x="${M}" y="1180" font-family="Mono" font-size="24" fill="${DIM}">AFTER — 推定</text>
+<text x="${M}" y="1180" font-family="Mono" font-size="24" fill="${DIM}">AFTER — est.</text>
 <text x="${M}" y="1240" font-family="Grotesk" font-weight="700" font-size="82" fill="${GREEN}">≈ ${usd(after)}</text>
 <text x="${W - M}" y="1200" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="64" fill="${ACCENT}">−${pct}%</text>
 <text x="${W - M}" y="1240" text-anchor="end" font-family="Mono" font-size="20" fill="${DIM}">conservative est.</text>
@@ -107,7 +107,7 @@ body{background:#FAF7F0;color:#111;font-family:'Mono',monospace;width:1080px;hei
 <div class="rule" style="height:2px;margin:30px 0"></div>
 <div id="levers">${levers.map((l, i) => `<div class="lev" id="lev${i}"><div><div class="k">${l[0]}</div></div><div class="v">− ${usd(l[1])}</div></div>`).join("")}</div>
 <div style="position:absolute;left:90px;bottom:170px">
-  <div class="lbl">AFTER — 推定</div><div class="after" id="num2">≈ $0</div>
+  <div class="lbl">AFTER — est.</div><div class="after" id="num2">≈ $0</div>
 </div>
 <div class="stamp" id="stamp" style="bottom:230px">−${r.pct}%</div>
 <div class="foot">✺ ESTIMATE · 100% local · not input-compression hype — TOKENOPS</div>
@@ -117,13 +117,13 @@ const fmt=n=>"≈ $"+Math.round(n).toLocaleString("en-US");
 const num=document.getElementById("num"),num2=document.getElementById("num2"),zing=document.getElementById("zing"),stamp=document.getElementById("stamp"),state=document.getElementById("state");
 const ease=t=>1-Math.pow(1-t,3);
 function count(el,from,to,ms,cb){const t0=performance.now();(function f(t){let p=Math.max(0,Math.min(1,(t-t0)/ms));el.textContent=fmt(from+(to-from)*ease(p));if(p<1)requestAnimationFrame(f);else if(cb)cb();})(performance.now());}
-function setFinal(){num.textContent=fmt(AFTER);num2.textContent=fmt(AFTER);zing.style.opacity=1;[0,1,2].forEach(i=>{const e=document.getElementById("lev"+i);e.style.opacity=1;e.style.transform="translateY(0)";});stamp.style.opacity=1;stamp.style.transform="scale(1)";state.textContent="推定";}
+function setFinal(){num.textContent=fmt(AFTER);num2.textContent=fmt(AFTER);zing.style.opacity=1;[0,1,2].forEach(i=>{const e=document.getElementById("lev"+i);e.style.opacity=1;e.style.transform="translateY(0)";});stamp.style.opacity=1;stamp.style.transform="scale(1)";state.textContent="est.";}
 if(location.hash==="#final"){setFinal();}  // deterministic end-state (for verification / static export)
 else{
   setTimeout(()=>count(num,0,BEFORE,900),300);
   setTimeout(()=>zing.style.opacity=1,1300);
   [0,1,2].forEach(i=>setTimeout(()=>{const e=document.getElementById("lev"+i);e.style.opacity=1;e.style.transform="translateY(0)";},2000+i*450));
-  setTimeout(()=>{state.textContent="推定";count(num,BEFORE,AFTER,1100);count(num2,0,AFTER,1100);},3700);
+  setTimeout(()=>{state.textContent="est.";count(num,BEFORE,AFTER,1100);count(num2,0,AFTER,1100);},3700);
   setTimeout(()=>{stamp.style.opacity=1;stamp.style.transform="scale(1)";},4900);
   setTimeout(setFinal,5300);// guarantee correct final state
 }
