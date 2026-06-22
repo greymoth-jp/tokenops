@@ -1,5 +1,9 @@
 # tokenops
 
+[![npm](https://img.shields.io/npm/v/@greymoth/tokenops?color=FF3B12)](https://www.npmjs.com/package/@greymoth/tokenops) · MIT · 100% local
+
+![Claude Code cost concentration](examples/waste-card.png)
+
 Claude Code の**実トークンコストを監査し、データで検証した最適化アクションを出す**ローカルツール。`~/.claude/projects` の JSONL を読むだけで、外部送信はゼロ。金額は推定API換算（Max/Pro 購読なら実支払いでなく「抽出した価値」）。
 
 cc-usage の engine/フォントを再利用（隣の `Desktop/cc-usage/`）。

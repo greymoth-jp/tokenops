@@ -1,6 +1,6 @@
 {
   "name": "@greymoth/tokenops",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Claude Code cost truth + data-validated optimization advice + riso Before→After share card. Local-only, sends nothing.",
   "type": "module",
   "bin": { "tokenops": "bin/tokenops.mjs" },

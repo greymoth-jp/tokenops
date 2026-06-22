@@ -131,7 +131,7 @@ else{
 }
 
 // Second share card: COST CONCENTRATION leaderboard — "few mega-sessions carry the bill".
-export function buildWasteCard(data) {
+export function buildWasteCard(data, opts = {}) {
   const big = data.sessions.filter(s => s.msgs >= 5).sort((a, b) => b.cost - a.cost);
   const total = big.reduce((a, s) => a + s.cost, 0);
   const top = big.slice(0, 9);
@@ -140,8 +140,9 @@ export function buildWasteCard(data) {
   const rows = top.map((s, i) => {
     const y = 660 + i * 68;
     const barW = Math.max(4, barMax * (s.cost / maxCost));
+    const label = opts.anon ? "session-" + String(i + 1).padStart(2, "0") : esc(s.project.slice(0, 16));
     return `<text x="${M}" y="${y}" font-family="Mono" font-weight="700" font-size="24" fill="${DIM}">${String(i + 1).padStart(2, "0")}</text>
-  <text x="${M + 52}" y="${y - 6}" font-family="Mono" font-weight="700" font-size="25" fill="${INK}">${esc(s.project.slice(0, 16))}</text>
+  <text x="${M + 52}" y="${y - 6}" font-family="Mono" font-weight="700" font-size="25" fill="${INK}">${label}</text>
   <text x="${M + 52}" y="${y + 17}" font-family="Mono" font-size="16" fill="${DIM}">${s.msgs}msg · ${tok(s.readPerMsg)}/turn · ${esc(shortModel(s.topModel))}</text>
   <rect x="${W - M - barMax - 132}" y="${y - 21}" width="${barW.toFixed(0)}" height="13" fill="${ACCENT}"/>
   <text x="${W - M}" y="${y}" text-anchor="end" font-family="Grotesk" font-weight="700" font-size="30" fill="${INK}">${usd(s.cost)}</text>`;

@@ -40,7 +40,7 @@ function help() {
   waste      per-session waste + cost concentration
   trend      weekly cost trend (actual spend)
   doctor     weigh always-on context (CLAUDE.md + memory) — fast, no scan
-  card       riso Before→After share card → _out/savings-card.svg
+  card       share cards (savings/animated/waste) → _out/  (--anon hides project names)
   portfolio  one-page story (the whole audit) → _out/portfolio.html
 reads ~/.claude/projects · sends nothing · $ = estimated API-equivalent, not subscription spend`;
 }
@@ -58,8 +58,9 @@ else if (cmd === "card") {
   const OUT = path.join(HERE, "..", "_out"); fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, "savings-card.svg"), r.svg);
   fs.writeFileSync(path.join(OUT, "card-animated.html"), buildAnimatedHTML(data));
-  fs.writeFileSync(path.join(OUT, "waste-card.svg"), buildWasteCard(data));
-  console.log(`BEFORE ${usd(r.total)} → AFTER ${usd(r.after)} (−${r.pct}%) · wrote savings-card.svg + card-animated.html + waste-card.svg`);
+  const anon = process.argv.includes("--anon"); // anonymize project names (shareable)
+  fs.writeFileSync(path.join(OUT, "waste-card.svg"), buildWasteCard(data, { anon }));
+  console.log(`BEFORE ${usd(r.total)} → AFTER ${usd(r.after)} (−${r.pct}%) · wrote savings-card.svg + card-animated.html + waste-card.svg${anon ? " (anon)" : ""}`);
 } else if (cmd === "portfolio") {
   const OUT = path.join(HERE, "..", "_out"); fs.mkdirSync(OUT, { recursive: true });
   const f = path.join(OUT, "portfolio.html"); fs.writeFileSync(f, buildPortfolio(data));
