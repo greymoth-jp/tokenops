@@ -3,3 +3,27 @@ _out/
 *.tgz
 *.log
 .DS_Store
+
+# === git-exposure-guardian (2026-06-22): never commit internal strategy/assets ===
+REQUIREMENTS.md
+RESEARCH_SURVIVORS.md
+REFERENCES.md
+RULES.md
+*HANDOFF*
+_docs/
+*MASTER*.md
+SELFKILL*.md
+COMPETITOR*.md
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.p8
+id_rsa*
+*-credentials.json
+serviceAccount*.json
+research_bus/
+MEMORY.md
+# === end git-exposure-guardian ===
