@@ -1,6 +1,6 @@
 {
   "name": "@greymoth/tokenops",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Claude Code cost truth + data-validated optimization advice + riso Before→After share card. Local-only, sends nothing.",
   "type": "module",
   "bin": { "tokenops": "bin/tokenops.mjs" },
@@ -8,7 +8,7 @@
   "repository": { "type": "git", "url": "git+https://github.com/greymoth-jp/tokenops.git" },
   "homepage": "https://github.com/greymoth-jp/tokenops#readme",
   "bugs": "https://github.com/greymoth-jp/tokenops/issues",
-  "files": ["bin", "engine.mjs", "lib.mjs", "advisor.mjs", "observatory.mjs", "savings-card.mjs", "portfolio.mjs", "doctor.mjs", "assets"],
+  "files": ["bin", "engine.mjs", "lib.mjs", "advisor.mjs", "observatory.mjs", "savings-card.mjs", "portfolio.mjs", "doctor.mjs", "demo.mjs", "assets"],
   "scripts": {
     "selfcheck": "node lib.mjs",
     "report": "node bin/tokenops.mjs report",

@@ -10,6 +10,7 @@ import { observatory, trend } from "../observatory.mjs";
 import { buildCard, buildAnimatedHTML, buildWasteCard } from "../savings-card.mjs";
 import { buildPortfolio } from "../portfolio.mjs";
 import { doctor } from "../doctor.mjs";
+import { demoData } from "../demo.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
@@ -40,6 +41,7 @@ function help() {
   waste      per-session waste + cost concentration
   trend      weekly cost trend (actual spend)
   doctor     weigh always-on context (CLAUDE.md + memory) — fast, no scan
+  demo       run on synthetic data (try it without your own usage)
   card       share cards (savings/animated/waste) → _out/  (--anon hides project names)
   portfolio  one-page story (the whole audit) → _out/portfolio.html
 reads ~/.claude/projects · sends nothing · $ = estimated API-equivalent, not subscription spend`;
@@ -48,6 +50,12 @@ reads ~/.claude/projects · sends nothing · $ = estimated API-equivalent, not s
 const cmd = (process.argv[2] || "report").toLowerCase();
 if (["help", "-h", "--help"].includes(cmd)) { console.log(help()); process.exit(0); }
 if (cmd === "doctor") { console.log(doctor()); process.exit(0); } // no JSONL scan needed — fast
+if (cmd === "demo") { // synthetic data — try it without your own Claude Code usage
+  const d = demoData();
+  console.log("=== tokenops DEMO · synthetic data (not your real usage) ===\n");
+  console.log(report(d) + "\n\n" + advise(d));
+  process.exit(0);
+}
 const data = scan();
 if (cmd === "report" || cmd === "summary") console.log(report(data));
 else if (cmd === "advise" || cmd === "advice") console.log(advise(data));
