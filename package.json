@@ -1,21 +1,54 @@
 {
   "name": "@greymoth/tokenops",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Claude Code cost truth + data-validated optimization advice + riso Before→After share card. Local-only, sends nothing.",
   "type": "module",
-  "bin": { "tokenops": "bin/tokenops.mjs" },
+  "bin": {
+    "tokenops": "bin/tokenops.mjs"
+  },
   "author": "greymoth",
-  "repository": { "type": "git", "url": "git+https://github.com/greymoth-jp/tokenops.git" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greymoth-jp/tokenops.git"
+  },
   "homepage": "https://greymoth-jp.github.io",
   "bugs": "https://github.com/greymoth-jp/tokenops/issues",
-  "files": ["bin", "engine.mjs", "lib.mjs", "advisor.mjs", "observatory.mjs", "savings-card.mjs", "portfolio.mjs", "doctor.mjs", "demo.mjs", "assets"],
+  "files": [
+    "bin",
+    "engine.mjs",
+    "lib.mjs",
+    "advisor.mjs",
+    "observatory.mjs",
+    "savings-card.mjs",
+    "portfolio.mjs",
+    "doctor.mjs",
+    "demo.mjs",
+    "assets"
+  ],
   "scripts": {
     "selfcheck": "node lib.mjs",
     "report": "node bin/tokenops.mjs report",
     "advise": "node bin/tokenops.mjs advise",
     "card": "node bin/tokenops.mjs card"
   },
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "license": "MIT",
-  "keywords": ["claude-code", "claude", "anthropic", "tokens", "cost", "cache", "prompt-caching", "llm", "cli", "optimization", "cost-optimization", "privacy", "local-first", "developer-tools"]
+  "keywords": [
+    "claude-code",
+    "claude",
+    "anthropic",
+    "tokens",
+    "cost",
+    "cache",
+    "prompt-caching",
+    "llm",
+    "cli",
+    "optimization",
+    "cost-optimization",
+    "privacy",
+    "local-first",
+    "developer-tools"
+  ]
 }
