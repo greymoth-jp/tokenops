@@ -2,6 +2,8 @@
 
 **Find out where your Claude Code spend actually goes — then get $-quantified actions to cut it. Local-only, sends nothing.**
 
+> Claude Codeのコスト実態を出し、データ検証済みの最適化アドバイスとBefore→After共有カードを生成。ローカルのみ。
+
 [![npm](https://img.shields.io/npm/v/@greymoth/tokenops?color=FF3B12&label=npm)](https://www.npmjs.com/package/@greymoth/tokenops)
 [![license](https://img.shields.io/badge/license-MIT-111111)](./LICENSE)
 ![no network](https://img.shields.io/badge/network_calls-0-23502f)
